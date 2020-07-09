@@ -1,7 +1,7 @@
 {
-  "name": "@peterkimzz/oauth2",
+  "name": "rest-oauth2",
   "version": "1.0.0",
-  "description": "The most easier to use OAuth2 authorization package.",
+  "description": "No more passport, just use simple REST API for OAuth2.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -10,10 +10,20 @@
   },
   "keywords": [
     "oauth",
-    "oauth2"
+    "oauth2",
+    "rest oauth2"
   ],
   "author": "peterkimzz <peterkimzz69@gmail.com>",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/peterkimzz/rest-oauth2.git"
+  },
+  "homepage": "https://github.com/peterkimzz/rest-oauth2.git",
+  "bugs": {
+    "url": "https://github.com/peterkimzz/rest-oauth2/issues",
+    "email": "peterkimzz69@gmail.com"
+  },
   "devDependencies": {
     "@types/node": "^14.0.20",
     "typescript": "^3.9.6"
