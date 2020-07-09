@@ -224,16 +224,21 @@ const userinfo = await paypalOAuth2.GetProfile(access_token)
   "locality": {
     "locality": "",
     "region": "",
-    "country": "",
+    "country": ""
   },
-  "verified_account": "",
+  "verified_account": true,
   "emails": [
     {
       "value": "",
       "primary": true,
       "confirmed": true
     },
-    ...
+    {
+      "value": "",
+      "primary": false,
+      "confirmed": true
+    }
+    // ...
   ]
 }
 ```
