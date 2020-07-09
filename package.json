@@ -1,0 +1,25 @@
+{
+  "name": "@peterkimzz/oauth2",
+  "version": "1.0.0",
+  "description": "The most easier to use OAuth2 authorization package.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rm -rf dist && node_modules/.bin/tsc",
+    "deploy": "npm publish"
+  },
+  "keywords": [
+    "oauth",
+    "oauth2"
+  ],
+  "author": "peterkimzz <peterkimzz69@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^14.0.20",
+    "typescript": "^3.9.6"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "querystring": "^0.2.0"
+  }
+}
