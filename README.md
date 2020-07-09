@@ -1,16 +1,16 @@
-# OAuth2
+# Rest OAuth2
 
 No more passport, just use simple REST API for OAuth2.
 
-To use client side is **not recommended**, because `client secret` is exposed.
+To use client side is **not recommended**.
 
-Typescript supported.
+_Typescript_ supported.
 
 ## Contents
 
 - [Supported providers](#Supported-providers)
 - [Installing](#Installing)
-- [Examples](#Examples)
+- [Usages](#Usages)
 - [API](#API)
 
 ## Supported providers
@@ -35,7 +35,7 @@ Using yarn:
 $ yarn add rest-oauth2
 ```
 
-## Examples
+## Usages
 
 This example uses `express`
 
@@ -75,8 +75,6 @@ import { GoogleOAuth2, FacebookOAuth2, PaypalOAuth2 } from 'rest-oauth2'
 
 **GoogleOAuth2**
 
-`Constructor()`
-
 ```ts
 const googleOAuth2 = new GoogleOAuth2({
   client_id: string,
@@ -85,13 +83,13 @@ const googleOAuth2 = new GoogleOAuth2({
 })
 ```
 
-`googleOAuth2.GenerateUrl()`
+### googleOAuth2.GenerateUrl()
 
 ```ts
 const url = googleOAuth2.GenerateUrl()
 ```
 
-`googleOAuth2.GetAccessToken()`
+### googleOAuth2.GetAccessToken()
 
 ```ts
 const data = await googleOAuth2.GetAccessToken(code)
@@ -106,7 +104,7 @@ const { access_token, scope, token_type, id_token, expires_in } = data
 | id_token     | String | "..."    |
 | expires_in   | Number | 3938     |
 
-`googleOAuth2.GetProfile()`
+### googleOAuth2.GetProfile()
 
 ```ts
 const userinfo = await googleOAuth2.GetProfile(access_token)
