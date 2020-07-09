@@ -1,55 +1,55 @@
-import axios from "axios";
-import { BaseOAuth2, IConstructor } from "./base";
+import axios from 'axios'
+import { BaseOAuth2, IConstructor } from './base'
 
 interface IPaypalConstructor extends IConstructor {
-  production?: boolean;
+  production?: boolean
 }
 
 interface AccessTokenResults {
-  nonce: string;
-  access_token: string;
-  refresh_token: string;
-  token_type: string;
-  expires_in: number;
+  nonce: string
+  access_token: string
+  refresh_token: string
+  token_type: string
+  expires_in: number
 }
 
 interface UserinfoResults {
-  user_id: string;
-  name: string;
-  payer_id: string;
+  user_id: string
+  name: string
+  payer_id: string
   address: {
-    locality: string;
-    region: string;
-    country: string;
-  };
-  verified_account: boolean;
+    locality: string
+    region: string
+    country: string
+  }
+  verified_account: boolean
   emails: {
-    value: string;
-    primary: boolean;
-    confirmed: boolean;
-  }[];
+    value: string
+    primary: boolean
+    confirmed: boolean
+  }[]
 }
 
 export class PaypalOAuth2 extends BaseOAuth2 {
-  readonly production: boolean;
-  private readonly base_url: string;
+  readonly production: boolean
+  private readonly base_url: string
 
   constructor(options: IPaypalConstructor) {
-    super(options);
+    super(options)
 
-    this.production = options.production || false;
+    this.production = options.production || false
     this.base_url = this.production
-      ? "https://api.paypal.com"
-      : "https://api.sandbox.paypal.com";
+      ? 'https://api.paypal.com'
+      : 'https://api.sandbox.paypal.com'
   }
 
   GenerateUrl(): string {
     const base_url = this.production
-      ? "https://www.paypal.com/connect"
-      : "https://www.sandbox.paypal.com/connect";
-    const flow_entry = "static";
+      ? 'https://www.paypal.com/connect'
+      : 'https://www.sandbox.paypal.com/connect'
+    const flow_entry = 'static'
     const scope =
-      "openid profile email address https://uri.paypal.com/services/paypalattributes";
+      'openid profile email address https://uri.paypal.com/services/paypalattributes'
 
     return (
       base_url +
@@ -57,51 +57,51 @@ export class PaypalOAuth2 extends BaseOAuth2 {
       `&client_id=${this.client_id}` +
       `&scope=${scope}` +
       `&redirect_uri=${this.redirect_uri}`
-    );
+    )
   }
 
   async GetAccessToken(code: string): Promise<AccessTokenResults> {
     try {
       const { data } = await axios({
-        method: "post",
-        url: this.base_url + "/v1/oauth2/token",
+        method: 'post',
+        url: this.base_url + '/v1/oauth2/token',
         headers: {
-          Accept: "application/json",
-          "Accept-Language": "en_US",
-          "Content-Type": "application/x-www-form-urlencoded",
+          Accept: 'application/json',
+          'Accept-Language': 'en_US',
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
         auth: {
           username: this.client_id,
           password: this.client_secret,
         },
         params: {
-          grant_type: "authorization_code",
+          grant_type: 'authorization_code',
           code,
         },
-      });
+      })
 
-      return data;
+      return data
     } catch (err) {
-      return Promise.reject(err);
+      return Promise.reject(err)
     }
   }
 
   async GetProfile(access_token: string): Promise<UserinfoResults> {
     try {
       const { data } = await axios({
-        method: "get",
-        url: this.base_url + "/v1/identity/oauth2/userinfo",
+        method: 'get',
+        url: this.base_url + '/v1/identity/oauth2/userinfo',
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
         params: {
-          schema: "paypalv1.1",
+          schema: 'paypalv1.1',
         },
-      });
+      })
 
-      return data;
+      return data
     } catch (err) {
-      return Promise.reject(err);
+      return Promise.reject(err)
     }
   }
 }

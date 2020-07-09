@@ -1,6 +1,6 @@
 {
   "name": "rest-oauth2",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "No more passport, just use simple REST API for OAuth2.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

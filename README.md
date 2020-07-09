@@ -22,7 +22,7 @@ _Typescript_ supported.
 - Facebook
 - PayPal
 
-> Other provders will be updated soon.
+> Other providers will be updated soon.
 
 ## Installing
 
@@ -57,7 +57,7 @@ app.get('/login/google', (req, res) => {
   const url = googleOAuth2.GenerateUrl()
   res.redirect(url)
 })
-app.get('/login/google/return', async (req, res, err) => {
+app.get('/login/google/return', async (req, res) => {
   const { code } = req.query
 
   const { access_token } = await googleOAuth2.GetAccessToken(code)
@@ -80,48 +80,52 @@ import { GoogleOAuth2, FacebookOAuth2, PaypalOAuth2 } from 'rest-oauth2'
 
 ```ts
 const googleOAuth2 = new GoogleOAuth2({
-  client_id: string,
-  client_secret: string,
-  redirect_uri: string,
+  client_id: '',
+  client_secret: '',
+  redirect_uri: '',
 })
 ```
 
-#### googleOAuth2.GenerateUrl()
+#### GenerateUrl()
 
 ```ts
 const url = googleOAuth2.GenerateUrl()
 ```
 
-#### googleOAuth2.GetAccessToken()
+#### GetAccessToken()
 
 ```ts
 const data = await googleOAuth2.GetAccessToken(code)
 ```
 
-| key          | type   | e.g.     |
-| ------------ | ------ | -------- |
-| access_token | String | "..."    |
-| scope        | String | "..."    |
-| id_token     | String | "..."    |
-| token_type   | String | "Bearer" |
-| expires_in   | Number | 3938     |
+```json
+{
+  "access_token": "",
+  "scope": "",
+  "id_token": "",
+  "token_type": "Bearer",
+  "expires_in": 3938
+}
+```
 
-#### googleOAuth2.GetProfile()
+#### GetProfile()
 
 ```ts
 const userinfo = await googleOAuth2.GetProfile(access_token)
 ```
 
-| key            | type    | e.g.                     |
-| -------------- | ------- | ------------------------ |
-| id             | String  | ""                       |
-| email          | String  | "peterkimzz69@gmail.com" |
-| name           | String  | "Peter Kim"              |
-| given_name     | String  | "Peter"                  |
-| family_name    | String  | "Kim"                    |
-| picture        | String  | "https://..."            |
-| locale         | String  | "en"                     |
-| verified_email | Boolean | true                     |
+```json
+{
+  "id": "",
+  "email": "",
+  "name": "",
+  "given_name": "",
+  "family_name": "",
+  "picture": "",
+  "locale": "en",
+  "verified_email": true
+}
+```
 
 ### FacebookOAuth2
 
@@ -133,37 +137,41 @@ const facebookOAuth2 = new FacebookOAuth2({
 })
 ```
 
-#### facebookOAuth2.GenerateUrl()
+#### GenerateUrl()
 
 ```ts
 const url = facebookOAuth2.GenerateUrl()
 ```
 
-#### facebookOAuth2.GetAccessToken()
+#### GetAccessToken()
 
 ```ts
 const data = await facebookOAuth2.GetAccessToken(code)
 ```
 
-| key          | type   | e.g.     |
-| ------------ | ------ | -------- |
-| access_token | String | "EA..."  |
-| token_type   | String | "Bearer" |
-| expires_in   | Number | 3938     |
+```json
+{
+  "access_token": "",
+  "token_type": "Bearer",
+  "expires_in": 39312
+}
+```
 
-#### facebookOAuth2.GetProfile()
+#### GetProfile()
 
 ```ts
 const userinfo = await facebookOAuth2.GetProfile(access_token)
 ```
 
-| key        | type    | e.g.                     |
-| ---------- | ------- | ------------------------ |
-| id         | String  | ""                       |
-| name       | String  | "Peter Kim"              |
-| first_name | String  | "Peter"                  |
-| last_name  | String  | "Kim"                    |
-| email      | String? | "peterkimzz69@gmail.com" |
+```json
+{
+  "id": "",
+  "name": "",
+  "first_name": "",
+  "last_name": "",
+  "email": ""
+}
+```
 
 ### PaypalOAuth2
 
@@ -176,40 +184,56 @@ const paypalOAuth2 = new PaypalOAuth2({
   client_id: '',
   client_secret: '',
   redirect_uri: '',
-  production: true | false,
+  production: true,
 })
 ```
 
-#### paypalOAuth2.GenerateUrl()
+#### GenerateUrl()
 
 ```ts
 const url = paypalOAuth2.GenerateUrl()
 ```
 
-#### paypalOAuth2.GetAccessToken()
+#### GetAccessToken()
 
 ```ts
 const data = await paypalOAuth2.GetAccessToken(code)
 ```
 
-| key           | type   | e.g.     |
-| ------------- | ------ | -------- |
-| access_token  | String | "..."    |
-| refresh_token | String | "..."    |
-| token_type    | String | "Bearer" |
-| nonce         | String | ""       |
-| expires_in    | Number | 3938     |
+```json
+{
+  "access_token": "",
+  "refresh_token": "",
+  "token_type": "Bearer",
+  "nonce": "",
+  "expires_in": 43123
+}
+```
 
-#### paypalOAuth2.GetProfile()
+#### GetProfile()
 
 ```ts
 const userinfo = await paypalOAuth2.GetProfile(access_token)
 ```
 
-| key              | type    | e.g.                                            |
-| ---------------- | ------- | ----------------------------------------------- |
-| user_id          | String  | "".                                             |
-| payer_id         | String  | ""                                              |
-| name             | String  | "Peter Kim"                                     |
-| verified_account | Boolean | true                                            |
-| emails           | Array   | [{ value: "", primary: true, confirmed: true }] |
+```json
+{
+  "user_id": "",
+  "payer_id": "",
+  "name": "",
+  "locality": {
+    "locality": "",
+    "region": "",
+    "country": "",
+  },
+  "verified_account": "",
+  "emails": [
+    {
+      "value": "",
+      "primary": true,
+      "confirmed": true
+    },
+    ...
+  ]
+}
+```
