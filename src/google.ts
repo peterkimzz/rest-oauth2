@@ -44,7 +44,7 @@ export class GoogleOAuth2 extends BaseOAuth2 {
     )
   }
 
-  async GetAccessToken(code: string): Promise<AccessTokenResults> {
+  async GetAccessTokenByCode(code: string): Promise<AccessTokenResults> {
     try {
       const payload = {
         code,
@@ -66,7 +66,7 @@ export class GoogleOAuth2 extends BaseOAuth2 {
     }
   }
 
-  async GetProfile(access_token: string): Promise<UserinfoResults> {
+  async GetProfileByAccessToken(access_token: string): Promise<UserinfoResults> {
     try {
       const { data } = await axios({
         url: 'https://www.googleapis.com/oauth2/v1/userinfo',
@@ -77,6 +77,16 @@ export class GoogleOAuth2 extends BaseOAuth2 {
       })
 
       return data
+    } catch (err) {
+      return Promise.reject(err)
+    }
+  }
+
+  async GetProfileByCode(code: string) {
+    try {
+      const { access_token } = await this.GetAccessTokenByCode(code)
+
+      return this.GetProfileByAccessToken(access_token)
     } catch (err) {
       return Promise.reject(err)
     }

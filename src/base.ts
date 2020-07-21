@@ -19,11 +19,14 @@ export abstract class BaseOAuth2 {
     throw new Error('implement required.')
   }
 
-  GetAccessToken(code: string) {
+  GetAccessTokenByCode(code: string) {
+    throw new Error('implement required.')
+  }
+  GetProfileByCode(code: string) {
     throw new Error('implement required.')
   }
 
-  GetProfile(access_token: string) {
+  GetProfileByAccessToken(access_token: string) {
     throw new Error('implement required.')
   }
 }

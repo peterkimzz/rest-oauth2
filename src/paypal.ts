@@ -60,7 +60,7 @@ export class PaypalOAuth2 extends BaseOAuth2 {
     )
   }
 
-  async GetAccessToken(code: string): Promise<AccessTokenResults> {
+  async GetAccessTokenByCode(code: string): Promise<AccessTokenResults> {
     try {
       const { data } = await axios({
         method: 'post',
@@ -86,7 +86,7 @@ export class PaypalOAuth2 extends BaseOAuth2 {
     }
   }
 
-  async GetProfile(access_token: string): Promise<UserinfoResults> {
+  async GetProfileByAccessToken(access_token: string): Promise<UserinfoResults> {
     try {
       const { data } = await axios({
         method: 'get',
@@ -100,6 +100,16 @@ export class PaypalOAuth2 extends BaseOAuth2 {
       })
 
       return data
+    } catch (err) {
+      return Promise.reject(err)
+    }
+  }
+
+  async GetProfileByCode(code: string) {
+    try {
+      const { access_token } = await this.GetAccessTokenByCode(code)
+
+      return this.GetProfileByAccessToken(access_token)
     } catch (err) {
       return Promise.reject(err)
     }

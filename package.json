@@ -25,8 +25,8 @@
     "email": "peterkimzz69@gmail.com"
   },
   "devDependencies": {
-    "@types/node": "^14.0.20",
-    "typescript": "^3.9.6"
+    "@types/node": "^14.0.24",
+    "typescript": "^3.9.7"
   },
   "dependencies": {
     "axios": "^0.19.2",
