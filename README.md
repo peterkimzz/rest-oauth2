@@ -247,6 +247,8 @@ const userinfo = await paypalOAuth2.GetProfile(access_token)
 
 ### KakaoOAuth2
 
+Kakao is available in South Korea.
+
 ```ts
 const kakaoOAuth2 = new KakaoOAuth2({
   client_id: '',
@@ -280,29 +282,27 @@ const data = await kakaoOAuth2.GetAccessToken(code)
 #### GetProfile()
 
 ```ts
-const userinfo = await googleOAuth2.GetProfile(access_token)
+const userinfo = await kakaoOAuth2.GetProfile(access_token)
 ```
 
 ```json
 {
-  {
-    "id": 100000000,
-    "connected_at": "2020-11-30T12:00:00Z",
-    "properties": {
-        "nickname": "Your name",
-        "profile_image": "http://...",
-        "thumbnail_image": "http://..."
+  "id": 100000000,
+  "connected_at": "2020-11-30T12:00:00Z",
+  "properties": {
+    "nickname": "Your name",
+    "profile_image": "http://...",
+    "thumbnail_image": "http://..."
+  },
+  "kakao_account": {
+    "profile_needs_agreement": false,
+    "profile": {
+      "nickname": "Your name",
+      "thumbnail_image_url": "http://...",
+      "profile_image_url": "http://..."
     },
-    "kakao_account": {
-        "profile_needs_agreement": false,
-        "profile": {
-            "nickname": "Your name",
-            "thumbnail_image_url": "http://...",
-            "profile_image_url": "http://..."
-        },
-        "has_email": true,
-        "email_needs_agreement": true
-    }
-}
+    "has_email": true,
+    "email_needs_agreement": true
+  }
 }
 ```
