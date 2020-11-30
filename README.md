@@ -15,12 +15,14 @@ _Typescript_ supported.
   - [Google](#GoogleOAuth2)
   - [Facebook](#FacebookOAuth2)
   - [Paypal](#PaypalOAuth2)
+  - [Kakao](#KakaoOAuth2)
 
 ## Supported providers
 
 - Google
 - Facebook
 - PayPal
+- Kakao (for Korean)
 
 > Other providers will be updated soon.
 
@@ -240,5 +242,67 @@ const userinfo = await paypalOAuth2.GetProfile(access_token)
     }
     // ...
   ]
+}
+```
+
+### KakaoOAuth2
+
+```ts
+const kakaoOAuth2 = new KakaoOAuth2({
+  client_id: '',
+  redirect_uri: '',
+})
+```
+
+#### GenerateUrl()
+
+```ts
+const url = kakaoOAuth2.GenerateUrl()
+```
+
+#### GetAccessToken()
+
+```ts
+const data = await kakaoOAuth2.GetAccessToken(code)
+```
+
+```json
+{
+  "access_token": "...",
+  "token_type": "bearer",
+  "refresh_token": "...",
+  "expires_in": 21599,
+  "scope": "profile",
+  "refresh_token_expires_in": 5183999
+}
+```
+
+#### GetProfile()
+
+```ts
+const userinfo = await googleOAuth2.GetProfile(access_token)
+```
+
+```json
+{
+  {
+    "id": 100000000,
+    "connected_at": "2020-11-30T12:00:00Z",
+    "properties": {
+        "nickname": "Your name",
+        "profile_image": "http://...",
+        "thumbnail_image": "http://..."
+    },
+    "kakao_account": {
+        "profile_needs_agreement": false,
+        "profile": {
+            "nickname": "Your name",
+            "thumbnail_image_url": "http://...",
+            "profile_image_url": "http://..."
+        },
+        "has_email": true,
+        "email_needs_agreement": true
+    }
+}
 }
 ```
